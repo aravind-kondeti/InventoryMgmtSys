@@ -1,0 +1,36 @@
+<section class="col-md-4 mx-auto">
+  <h2 class = "text-center">Add Transaction</h2>
+  <div *ngIf="message != undefined">{{message}}</div>
+  <form #frm="ngForm" (ngSubmit)="addTxn()" [hidden] = "flag">
+
+    <div>Quantity</div>
+    <div><input type="number" name="qty" [(ngModel)]="txn.qty" #txnqty = "ngModel" class = "form-control" required placeholder="Enter Quantity"/></div>
+    <div class = "alert alert-danger" *ngIf="txnqty.invalid && (txnqty.touched || txnqty.dirty)">Quantity is required.</div>
+  
+    <div>Vendor ID</div>
+    <div><input type="number" name="vid" [(ngModel)]="txn.vendorId" #txnvid = "ngModel" class = "form-control" required placeholder="Enter Vendor Id"/></div>
+    <div class = "alert alert-danger" *ngIf="txnvid.invalid && (txnvid.touched || txnvid.dirty)">Vendor ID is required.</div>
+  
+    <div>Product ID</div>
+    <div><input type="number" name="pid" [(ngModel)]="txn.productId" #txnpid = "ngModel" class = "form-control"  required placeholder="Enter Product Id"/></div>
+    <div class = "alert alert-danger" *ngIf="txnpid.invalid && (txnpid.touched || txnpid.dirty)">Product ID is required.</div>
+  
+    <div>Vendor Type</div>
+    <div><select name="vt"  [(ngModel)]="txn.vendortype" #vtype="ngModel" required>
+          <option value="">--select vendor type--</option>
+          <option value="supplier">Supplier</option>
+          <option value="Customer">Customer</option>
+          
+        </select></div>
+  <div class="alert alert-danger" *ngIf="vtype.invalid && vtype.touched">Select Vendor type</div>
+  <div class="mt-2 text-center"><input type="submit" value="Add Transaction" [disabled]="!frm.valid" class="btn btn-danger"/>
+  </div>  
+  
+    <article *ngIf="flag" style=" margin: 100px;">
+    <div><h2 style="text-align: center;">Successfully Added</h2></div>
+    <div style="text-align: center;"><input type="button" value="Go Back" 
+      style="background-color: green;" (click)="goback()" /> </div>
+    </article>
+  
+  </form>
+  </section>

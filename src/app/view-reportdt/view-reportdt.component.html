@@ -1,0 +1,51 @@
+<section *ngIf="showFormFlag">
+  <form #frm="ngForm" (ngSubmit)="processReport()">
+   
+    <div>From Date</div>
+    <div><input type="date" name="fromDt" [(ngModel)]="fromDt" #fromDate="ngModel" class="form-control" required/></div>
+    <div class="alert alert-danger" *ngIf="fromDate.invalid && fromDate.touched">From Date is required</div>
+    
+    <div>To Date</div>
+    <div><input type="date" name="toDt" [(ngModel)]="toDt" #toDate="ngModel" class="form-control" required/></div>
+    <div class="alert alert-danger" *ngIf="toDate.invalid && toDate.touched">To  Date  is required</div>
+  
+   <div>Report Type</div>
+    <div><select name="rt" required [(ngModel)]="rtype" #rt="ngModel">
+          <option value="">--select report--</option>
+          <option value="0">Sales</option>
+          <option value="1">Purchase</option>
+          
+        </select></div>
+  <div class="alert alert-danger" *ngIf="rt.invalid && rt.touched">Select Report type</div>
+  
+  
+       <div class="mt-2 text-center"><input type="submit" value="View Transactions" [disabled]="!frm.valid" class="btn btn-danger"/>
+    </div>
+  </form>
+  </section>
+  <table class="col-md-6 mx-auto table table-primary table-striped table-hover" *ngIf="showTableFlag">
+    <tr>
+      <th><a class = "btn btn-primary" (click)="bindOrder('dateOfTxn')">Date Of Txn</a></th>
+      <th><a class = "btn btn-primary" (click)="bindOrder('prod.productId')">Product ID</a></th>
+      <th><a class = "btn btn-warning" (click)="bindOrder('prod.productName')">Produt Name</a></th>
+      <th><a class = "btn btn-danger" (click)="bindOrder('prod.productModel')">Product Model</a></th>
+      <th><a class = "btn btn-success" (click)="bindOrder('prod.brand')">Product Brand</a></th>
+      <th><a class = "btn btn-dark" (click)="bindOrder('vendor.comapanyName')">Vendor</a></th>
+      <th><a class = "btn btn-secondary" (click)="bindOrder('qty')">qty</a></th>
+      <th><a class = "btn btn-primary" (click)="bindOrder('vendor.contact')">Contact No</a></th>
+  
+    </tr>
+    
+    <tr *ngFor="let inv of txns | orderby:field">
+      <td>{{inv.dateOfTxn}}</td>
+      <td>{{inv.prod.productId}}</td>
+      <td>{{inv.prod.productName | titlecase}}</td>
+      <td>{{inv.prod.productModel | titlecase}}</td>
+      <td>{{inv.prod.brand | titlecase}}</td>
+      <td>{{inv.vendor.companyName}}</td>
+      <td>{{inv.qty}}</td>
+      <td>{{inv.vendor.contact}}
+      
+    </tr>
+  </table>
+  

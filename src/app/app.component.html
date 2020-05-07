@@ -1,21 +1,64 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
-<router-outlet></router-outlet>
+<head>
+    <style>
+        #mainmenu li{
+              
+              background-color:green;
+              color: white;
+              list-style-type: none;
+          }
+          #submenu{
+              
+              display: none;
+              position: absolute;
+          }
+          #submenu li{
+              
+              background-color: green;
+              list-style-type: none;
+          }
+          #mainmenu li:hover ul{
+              display: block;
+             
+          }
+          
+    </style>
+  </head>
+  <header class="jumbotron text-center">
+  <h1>{{title}}</h1>
+  <div class="col-md-1 text-center">
+    <span *ngIf="token!=undefined && token != null">
+  <a class="nav-item nav-link text-white text-center bg-danger m-2" (click)="logout()">Logout</a>
+    </span>
+    <span *ngIf="token==undefined || token == null">
+      <a class="nav-item nav-link text-white text-center bg-success m-2" (click)="showLogin()">Login</a>
+    </span>
+  </div>
+  </header>
+  <nav class="col-md-12 mx-auto bg-dark p-2 row">
+    
+     <a routerLink="addInvTxn" class="nav-link text-white" (click)="hideLogin()">Add Transaction</a>
+  <a routerLink="viewProducts" class="nav-link text-white" (click)="hideLogin()">Stock</a>
+  <a routerLink="viewVendors" class="nav-link text-white" (click)="hideLogin()">Vendors</a>
+  <a routerLink="ViewReportDt" class="nav-link text-white"(click)="hideLogin()">Datewise Report</a>
+  <a routerLink="salesReport" class="nav-link text-white" (click)="hideLogin()">Sales Report</a>
+  <a routerLink="purchaseReport" class="nav-link text-white" (click)="hideLogin()">Purchase Report</a>
+    
+  </nav>
+  <router-outlet></router-outlet>
+  <div *ngIf="msg!= undefined">{{msg}}</div>
+  <section class="col-md-4 mx-auto" *ngIf="tokenflag">
+    <div class="alert alert-danger" *ngIf="errorMsg!=undefined">{{errorMsg}}</div>
+    <h2 class="text-center">Login</h2>
+    <form #frm="ngForm" (ngSubmit)="doLogin()">
+     <div>ID</div>
+     <div><input type="text" name="txtid" [(ngModel)]="login.uname" required #bkid="ngModel" class="form-control"/></div>
+     <div class="alert alert-danger" *ngIf="bkid.invalid && bkid.touched">User ID is required</div>
+  
+     <div>Password</div>
+     <div><input type="password" name="txtpwd" [(ngModel)]="login.pwd" required #bkpwd="ngModel" class="form-control"/></div>
+     <div class="alert alert-danger" *ngIf="bkpwd.invalid && bkpwd.touched">Password is required</div>
+     <div class="mt-2 text-center"><input type="submit" value="Login" [disabled]="!frm.valid" class="btn btn-danger"/></div>
+    </form>
+  </section>
+  

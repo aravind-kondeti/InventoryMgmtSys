@@ -1,0 +1,39 @@
+<div>
+  <h2 class = "col-md-6 mx-auto p-2" style="text-align: center;">Sales Report</h2>
+</div>
+<table class="col-md-6 mx-auto table table-danger table-striped table-hover">
+  <tr>
+    <th><a class = "btn btn-primary" (click)="bindOrder('dateOfTxn')">Date Of Txn</a></th>
+    <th><a class = "btn btn-primary" (click)="bindOrder('inventoryId')">inventory Id</a></th>
+    <th><a class = "btn btn-primary" (click)="bindOrder('prod.productId')">Product ID</a></th>
+    <th><a class = "btn btn-primary" (click)="bindOrder('vendor.vendortype')">vendor Type</a></th>
+    <th><a class = "btn btn-warning" (click)="bindOrder('prod.productName')">Produt Name</a></th>
+    <th><a class = "btn btn-danger" (click)="bindOrder('prod.productModel')">Product Model</a></th>
+    <th><a class = "btn btn-success" (click)="bindOrder('prod.brand')">Product Brand</a></th>
+    <th><a class = "btn btn-dark" (click)="bindOrder('vendor.comapanyName')">Vendor</a></th>
+    <th><a class = "btn btn-secondary" (click)="bindOrder('qty')">qty</a></th>
+    <th><a class = "btn btn-primary" (click)="bindOrder('vendor.contact')">Contact No</a></th>
+
+  </tr>
+  
+  <tr *ngFor="let inv of txns ">
+    <td>{{inv.dateOfTxn}}</td>
+    <td>{{inv.inventoryId}}</td>
+     <td>{{inv.prod.productId}}</td>
+    <td>{{inv.vendor.vendortype}}</td>
+    <td>{{inv.prod.productName | titlecase}}</td>
+    <td>{{inv.prod.productModel | titlecase}}</td>
+    <td>{{inv.prod.brand | titlecase}}</td>
+     <td>{{inv.vendor.companyName}}</td>
+    <td>{{inv.qty}}</td>
+    <td>{{inv.vendor.contact}}
+    
+    
+  </tr>
+ 
+</table>
+
+<div class = text-center>
+  <a class="btn btn-primary text-white" routerLink= "DownloadSalesReport">Download</a>
+  
+</div>

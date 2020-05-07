@@ -1,0 +1,29 @@
+<html>
+<div>
+	<h1 class="col-md-6 mx-auto" style="background-color: cornflowerblue; text-align: center;" >Vendor Details</h1>
+	
+</div>
+<div>
+<table class="col-md-6 mx-auto table table-primary table-striped table-hover">
+  <tr>
+    <th><a class = "btn btn-primary" (click)="bindOrder('vendorId')">Vendor Id</a></th>
+    <th><a class = "btn btn-danger" (click)="bindOrder('companyName')">Company Name</a></th>
+    <th><a class = "btn btn-warning" >Address</a></th>
+    <th><a class = "btn btn-secondary" (click)="bindOrder('area')">Area</a></th>
+    <th><a class = "btn btn-success" >Contact</a></th>
+    <th><a class = "btn btn-dark" (click)="bindOrder('city')">City</a></th>
+    <th><a class = "btn btn-danger" (click)="bindOrder('vendortype')">Vendor Type</a></th>
+  </tr>
+  <tr *ngFor="let vendor of vendors | sortBy:field">
+    <td>{{vendor.vendorId}}</td>
+    <td>{{vendor.companyName | titlecase}}</td>
+    <td>{{vendor.address | titlecase}}</td>
+    <td>{{vendor.area | titlecase}}</td>
+    <td>{{vendor.contact}}</td>
+    <td>{{vendor.city | titlecase}}</td>
+    <td>{{vendor.vendortype | uppercase}}</td>
+    <td><a class="btn btn-danger text-white"  routerLink="vendorTxns/{{vendor.vendorId}}" >view txn</a></td>
+  </tr>
+</table>
+</div>
+</html>

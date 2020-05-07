@@ -1,0 +1,22 @@
+<div>
+  <h2 class = "col-md-6 mx-auto p-2" style="text-align: center;">Transactions</h2>
+</div>
+<table class="col-md-6 mx-auto table table-danger table-striped table-hover">
+  <tr>
+    <th>Transaction Id</th>
+    <th>Quantity</th>
+    <th>Date Of Transaction</th>
+    <th>Transaction Type</th>
+    <th>Product ID</th> 
+    
+  </tr>
+  <tr *ngFor="let invTxn of vendorTxns">
+    <td>{{invTxn.inventoryId}}</td>
+    <td>{{invTxn.qty}}</td>
+    <td>{{invTxn.dateOfTxn}}</td>
+    <td>{{invTxn.txtType | uppercase}}</td>
+    <td>{{invTxn.prod.productId}}</td> 
+    
+  </tr>
+</table>
+
